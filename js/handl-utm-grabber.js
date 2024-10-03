@@ -1,5 +1,5 @@
 jQuery(function($) {
-	$.each([ 'utm_source','utm_medium','utm_term', 'utm_content', 'utm_campaign', 'gclid', 'email', 'username' ], function( i,v ) {
+	$.each([ 'utm_source','utm_medium','utm_term', 'utm_content', 'utm_campaign', 'utm_obj', 'utm_loc', 'utm_adname', 'utm_adset', 'gclid', 'email', 'username' ], function( i,v ) {
 		var curval = Cookies.get(v)
 		
 		if (curval != undefined) {

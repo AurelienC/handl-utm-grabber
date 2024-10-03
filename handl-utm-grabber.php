@@ -27,7 +27,7 @@ function CaptureUTMs(){
 	$_COOKIE['handl_ref'] =  isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''; 
 	$_COOKIE['handl_url'] =  ( isset($_SERVER["HTTPS"]) ? 'https://' : 'http://' ) . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 	
-	$fields = array('utm_source','utm_medium','utm_term', 'utm_content', 'utm_campaign', 'gclid', 'handl_original_ref', 'handl_landing_page', 'handl_ip', 'handl_ref', 'handl_url', 'email', 'username');
+	$fields = array('utm_source','utm_medium','utm_term', 'utm_content', 'utm_campaign', 'utm_obj', 'utm_loc', 'utm_adname', 'utm_adset', 'gclid', 'handl_original_ref', 'handl_landing_page', 'handl_ip', 'handl_ref', 'handl_url', 'email', 'username');
        
         $cookie_field = '';
 	foreach ($fields as $id=>$field){
@@ -153,7 +153,7 @@ function HUG_Append_All($content) {
 add_filter( 'the_content', 'HUG_Append_All', 999 );
 
 function HUGGenerateUTMsForURL(){
-  $fields = array('utm_source','utm_medium','utm_term', 'utm_content', 'utm_campaign', 'gclid');
+  $fields = array('utm_source','utm_medium','utm_term', 'utm_content', 'utm_campaign', 'utm_obj', 'utm_loc', 'utm_adname', 'utm_adset', 'gclid');
   $utms = array();
   foreach ($fields as $id=>$field){
     if (isset($_COOKIE[$field]) && $_COOKIE[$field] != '')
@@ -163,7 +163,7 @@ function HUGGenerateUTMsForURL(){
 }
 
 function HandLUTMGrabberWooCommerceUpdateOrderMeta( $order_id ) {
-	$fields = array('utm_source','utm_medium','utm_term', 'utm_content', 'utm_campaign', 'gclid', 'handl_original_ref', 'handl_landing_page', 'handl_ip', 'handl_ref', 'handl_url');
+	$fields = array('utm_source','utm_medium','utm_term', 'utm_content', 'utm_campaign', 'utm_obj', 'utm_loc', 'utm_adname', 'utm_adset', 'gclid', 'handl_original_ref', 'handl_landing_page', 'handl_ip', 'handl_ref', 'handl_url');
 	foreach ($fields as $field){
 		if (isset($_COOKIE[$field]) && $_COOKIE[$field] != '')
 		update_post_meta( $order_id, $field, esc_attr($_COOKIE[$field]));
@@ -228,13 +228,13 @@ function handl_admin_notice__success() {
     <div class="notice notice-warning handl-notice-dismiss is-dismissible">
         <p class='handl-notice-title'>HandL UTM Grabber has some new features...</p>
 	<ul class='handl-notice-list'>
-		<li><span class="dashicons dashicons-clipboard"></span> <a href="https://www.haktansuren.com/handl-utm-grabber/?utm_medium=referral&utm_source=<?php print $_SERVER["SERVER_NAME"]?>&utm_campaign=HandL+UTM+Grabber&utm_content=New+Features" target="_blank">Check out documentations</a></li>
+		<li><span class="dashicons dashicons-clipboard"></span> <a href="https://www.haktansuren.com/handl-utm-grabber/" target="_blank">Check out documentations</a></li>
 		<li><span class="dashicons dashicons-sos"></span> <a href="https://wordpress.org/support/plugin/handl-utm-grabber" target="_blank">Get Some Help</a></li>
 		<li><span class="dashicons dashicons-heart"></span> <a href="https://wordpress.org/support/view/plugin-reviews/handl-utm-grabber" target="_blank">Like Us!</a></li>
 		<li><span class="dashicons dashicons-smiley"></span> <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SS93TW4NEHHNG" target="_blank">Donate</a></li>
 	</ul>
 	<p><span class="dashicons dashicons-info"></span> <a href="options-general.php?page=handl-utm-grabber.php">Would you like to append UTM variables to all URLs on your site?</a></p>
-	<p class='new-plugin'><span class="dashicons dashicons-video-alt3"></span> <a href="https://www.haktansuren.com/handl-youtube-extra/?utm_medium=referral&utm_source=<?php print $_SERVER["SERVER_NAME"]?>&utm_campaign=HandL+UTM+Grabber&utm_content=New+Plugin+HandL+YouTube+Extra" target="_blank">New Plugin! Track your YouTube videos</a></p>
+	<p class='new-plugin'><span class="dashicons dashicons-video-alt3"></span> <a href="https://www.haktansuren.com/handl-youtube-extra/" target="_blank">New Plugin! Track your YouTube videos</a></p>
     </div>
     <script>
     jQuery(document).on( 'click', '.handl-notice-dismiss>.notice-dismiss', function() {
